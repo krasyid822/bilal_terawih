@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Tarawih Icon">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8dd0f5" />
+      <stop offset="100%" stop-color="#d66a00" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="32" fill="#0b0f1a" />
+  <circle cx="140" cy="60" r="34" fill="url(#g)" opacity="0.9" />
+  <path d="M60 170c0-38 20-70 50-80-8 10-12 25-12 42 0 6 1 12 2 18l-40 20z" fill="#ffe8c7" opacity="0.9" />
+  <path d="M46 92c14-10 34-16 54-16 6 0 12 1 18 2-22 8-38 26-46 50l-26-36z" fill="#9ac7ff" opacity="0.9" />
+  <circle cx="86" cy="86" r="8" fill="#fff" opacity="0.9" />
+  <circle cx="108" cy="70" r="6" fill="#fff" opacity="0.9" />
+</svg>
