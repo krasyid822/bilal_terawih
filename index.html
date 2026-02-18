@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Bacaan Bilal Sholat Tarawih</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+	<style>
+		@font-face {
+			font-family: "ArabicUI";
+			src: url("font.woff2") format("woff2");
+			font-weight: 400 700;
+			font-display: swap;
+		}
+
+		:root {
+			color-scheme: dark;
+			--bg: #0b0f1a;
+			--bg-main: radial-gradient(circle at 22% 18%, rgba(140, 170, 210, 0.14), transparent 30%),
+									radial-gradient(circle at 78% 12%, rgba(90, 120, 170, 0.12), transparent 34%),
+									linear-gradient(150deg, #0a0f1d, #0e1627 55%, #080c15 100%);
+			--texture: radial-gradient(circle at 24% 34%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.08) 9px, transparent 16px),
+									radial-gradient(circle at 70% 58%, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0.06) 11px, transparent 18px),
+									radial-gradient(circle at 42% 78%, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 14px, transparent 22px),
+									repeating-radial-gradient(circle at 60% 24%, rgba(255, 255, 255, 0.04) 0 2px, transparent 3px 12px);
+			--card: rgba(255, 255, 255, 0.06);
+			--card-border: rgba(255, 255, 255, 0.08);
+			--text: #e8edf6;
+			--muted: #b7c3d6;
+			--accent: #9ac7ff;
+			--accent-2: #70e3ff;
+			--shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+			--arabic-size: 22px;
+			--arabic-color: #fefefe;
+			--arabic-bg: rgba(255, 255, 255, 0.04);
+			--arabic-border: rgba(255, 255, 255, 0.08);
+			--hero-bg: linear-gradient(135deg, rgba(140, 180, 240, 0.22), rgba(8, 18, 32, 0.92));
+			--hero-border: rgba(255, 255, 255, 0.08);
+			--hero-title: #f4f7fb;
+			--button-bg: linear-gradient(135deg, rgba(154, 199, 255, 0.24), rgba(10, 20, 40, 0.8));
+			--button-border: rgba(255, 255, 255, 0.16);
+			--button-text: #e8f2ff;
+			--badge-bg: linear-gradient(135deg, rgba(154, 199, 255, 0.22), rgba(14, 26, 48, 0.9));
+			--badge-border: rgba(255, 255, 255, 0.16);
+			--badge-text: #eaf2ff;
+			--role-muted: rgba(232, 237, 246, 0.55);
+			--role-strong: rgba(232, 237, 246, 1);
+			--texture-opacity: 0.55;
+			--texture-size: 420px 420px;
+		}
+
+		[data-theme="light"] {
+			color-scheme: light;
+			--bg: #fff6e3;
+			--bg-main: radial-gradient(circle at 20% 18%, rgba(255, 204, 128, 0.28), transparent 30%),
+									radial-gradient(circle at 80% 12%, rgba(255, 160, 122, 0.22), transparent 36%),
+									radial-gradient(circle at 50% 72%, rgba(255, 226, 170, 0.18), transparent 40%),
+									linear-gradient(145deg, #fff6e3, #ffe8c7 60%, #fff7ea 100%);
+			--texture: radial-gradient(circle at 26% 30%, rgba(255, 190, 110, 0.22) 0, rgba(255, 190, 110, 0.22) 16px, transparent 26px),
+									radial-gradient(circle at 66% 44%, rgba(255, 170, 90, 0.18) 0, rgba(255, 170, 90, 0.18) 14px, transparent 24px),
+									radial-gradient(circle at 54% 64%, rgba(255, 214, 140, 0.16) 0, rgba(255, 214, 140, 0.16) 22px, transparent 32px),
+									repeating-radial-gradient(circle at 58% 22%, rgba(255, 210, 120, 0.12) 0 3px, transparent 5px 14px);
+			--card: rgba(255, 255, 255, 0.92);
+			--card-border: rgba(180, 120, 60, 0.18);
+			--text: #2c1c0f;
+			--muted: #5a4030;
+			--accent: #d66a00;
+			--accent-2: #ffb347;
+			--shadow: 0 18px 42px rgba(150, 90, 20, 0.14);
+			--arabic-color: #2c1c0f;
+			--arabic-bg: rgba(0, 0, 0, 0.04);
+			--arabic-border: rgba(0, 0, 0, 0.08);
+			--hero-bg: linear-gradient(140deg, rgba(255, 196, 128, 0.28), rgba(255, 236, 210, 0.9));
+			--hero-border: rgba(180, 120, 60, 0.14);
+			--hero-title: #2c1c0f;
+			--button-bg: linear-gradient(135deg, rgba(255, 199, 134, 0.5), rgba(255, 236, 210, 0.9));
+			--button-border: rgba(180, 120, 60, 0.32);
+			--button-text: #2c1c0f;
+			--badge-bg: linear-gradient(135deg, rgba(255, 210, 140, 0.56), rgba(255, 234, 210, 0.92));
+			--badge-border: rgba(180, 120, 60, 0.32);
+			--badge-text: #2c1c0f;
+			--role-muted: rgba(44, 28, 15, 0.6);
+			--role-strong: rgba(44, 28, 15, 1);
+			--texture-opacity: 0.58;
+			--texture-size: 360px 360px;
+		}
+
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+
+		body {
+			min-height: 100vh;
+			font-family: "Manrope", system-ui, -apple-system, sans-serif;
+			background: var(--bg-main);
+			color: var(--text);
+			padding: 32px 18px 48px;
+			display: flex;
+			justify-content: center;
+			transition: background 280ms ease, color 200ms ease;
+			position: relative;
+			overflow-x: hidden;
+		}
+
+		body::after {
+			content: "";
+			position: fixed;
+			inset: 0;
+			background-image: var(--texture);
+			background-size: var(--texture-size);
+			opacity: var(--texture-opacity);
+			pointer-events: none;
+			mix-blend-mode: overlay;
+			z-index: 0;
+		}
+
+		.page {
+			width: min(1100px, 100%);
+			display: flex;
+			flex-direction: column;
+			gap: 22px;
+			position: relative;
+			z-index: 1;
+		}
+
+		.hero {
+			position: relative;
+			padding: 28px 26px;
+			border-radius: 18px;
+			background: var(--hero-bg);
+			border: 1px solid var(--hero-border);
+			overflow: hidden;
+			box-shadow: var(--shadow);
+			transition: transform 200ms ease, box-shadow 200ms ease;
+		}
+
+		.hero::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at 70% 0%, rgba(255, 255, 255, 0.2), transparent 35%);
+			pointer-events: none;
+		}
+
+		.hero h1 {
+			font-family: "Playfair Display", "Manrope", serif;
+			letter-spacing: 0.4px;
+			font-size: clamp(26px, 3vw, 34px);
+			line-height: 1.3;
+			margin-bottom: 8px;
+			color: var(--hero-title);
+		}
+
+		.hero p {
+			max-width: 780px;
+			color: var(--muted);
+			line-height: 1.6;
+			font-size: 15px;
+		}
+
+		.hero:hover { transform: translateY(-2px); }
+
+		.toolbar {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			margin-top: 14px;
+			align-items: center;
+		}
+
+		.toolbar .group {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 12px;
+			border-radius: 12px;
+			background: rgba(255, 255, 255, 0.06);
+			border: 1px solid var(--card-border);
+			color: var(--muted);
+			font-size: 13px;
+		}
+
+		.toolbar label { font-weight: 600; color: var(--text); }
+
+		.toolbar input[type="range"] {
+			accent-color: var(--accent);
+			cursor: pointer;
+		}
+
+		.toolbar button {
+			appearance: none;
+			border: 1px solid var(--button-border);
+			background: var(--button-bg);
+			color: var(--button-text);
+			padding: 10px 14px;
+			border-radius: 12px;
+			font-weight: 700;
+			cursor: pointer;
+			transition: transform 120ms ease, border-color 120ms ease, background 180ms ease;
+		}
+
+		.mode-btn {
+			padding: 8px 12px;
+			font-weight: 700;
+			border-radius: 10px;
+			border: 1px solid var(--button-border);
+			background: rgba(255, 255, 255, 0.05);
+			color: var(--text);
+			transition: transform 120ms ease, border-color 120ms ease, background 180ms ease;
+		}
+
+		.mode-btn.active {
+			background: var(--button-bg);
+			color: var(--button-text);
+			border-color: var(--button-border);
+			transform: translateY(-1px);
+			box-shadow: 0 0 0 1px rgb(255, 255, 255), 0 8px 18px rgb(0, 0, 0);
+		}
+
+		.toolbar button:hover { transform: translateY(-1px); border-color: rgba(255, 255, 255, 0.2); }
+		.toolbar button:active { transform: translateY(0); }
+
+		.cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 16px;
+		}
+
+		.card {
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: 16px;
+			padding: 18px 18px 16px;
+			box-shadow: var(--shadow);
+			backdrop-filter: blur(10px);
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			position: relative;
+			overflow: hidden;
+			transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+		}
+
+		.card::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.08), transparent 30%);
+			opacity: 0;
+			transition: opacity 200ms ease;
+			pointer-events: none;
+		}
+
+		.card:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.16); box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28); }
+		.card:hover::before { opacity: 1; }
+
+		.card-head {
+			display: flex;
+			gap: 12px;
+			align-items: flex-start;
+			justify-content: space-between;
+		}
+
+		.badge {
+			min-width: 34px;
+			height: 34px;
+			border-radius: 10px;
+			background: var(--badge-bg);
+			border: 1px solid var(--badge-border);
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 700;
+			color: var(--badge-text);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+			font-size: 14px;
+		}
+
+		.role { display: inline-block; }
+		body[data-mode="bilal"] .role-jamaah { opacity: 0.55; color: var(--role-muted); }
+		body[data-mode="jamaah"] .role-bilal { opacity: 0.55; color: var(--role-muted); }
+		.role-bilal { color: var(--role-strong); }
+		.role-jamaah { color: var(--role-strong); }
+		.role-neutral { color: var(--text); opacity: 1; }
+
+		.judul {
+			font-weight: 700;
+			color: var(--text);
+			font-size: 15px;
+			line-height: 1.4;
+		}
+
+		.arabic {
+			font-family: "ArabicUI", "Scheherazade", serif;
+			font-size: clamp(12px, var(--arabic-size), 64px);
+			line-height: 1.7;
+			color: var(--arabic-color);
+			text-align: right;
+			direction: rtl;
+			background: var(--arabic-bg);
+			border-radius: 12px;
+			padding: 12px;
+			border: 1px solid var(--arabic-border);
+		}
+
+		.latin, .translate {
+			color: var(--muted);
+			line-height: 1.6;
+			font-size: 14px;
+		}
+
+		.latin strong { color: var(--text); }
+
+		.controls {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: flex-end;
+		}
+
+		button.audio-btn {
+			appearance: none;
+			border: 1px solid var(--button-border);
+			background: var(--button-bg);
+			color: var(--button-text);
+			padding: 10px 14px;
+			border-radius: 12px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: transform 120ms ease, border-color 120ms ease, background 180ms ease;
+		}
+
+		button.audio-btn:hover { transform: translateY(-1px); border-color: rgba(255, 255, 255, 0.2); }
+		button.audio-btn:active { transform: translateY(0); }
+		button.audio-btn:disabled {
+			cursor: not-allowed;
+			opacity: 0.55;
+			background: rgba(0, 0, 0, 0.06);
+		}
+
+		.empty {
+			grid-column: 1 / -1;
+			text-align: center;
+			color: var(--muted);
+			padding: 32px;
+			border: 1px dashed rgba(255, 255, 255, 0.15);
+			border-radius: 12px;
+			background: rgba(255, 255, 255, 0.03);
+		}
+
+		.spark {
+			position: fixed;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			pointer-events: none;
+			background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(141, 208, 245, 0.1));
+			box-shadow: 0 0 12px rgba(141, 208, 245, 0.8);
+			animation: spark 600ms ease-out forwards;
+			mix-blend-mode: screen;
+		}
+
+		@keyframes spark {
+			0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+			60% { transform: translate(-50%, -50%) scale(1.8); opacity: 0.7; }
+			100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+		}
+
+		@media (max-width: 640px) {
+			body { padding: 22px 14px 34px; }
+			.card { padding: 16px; }
+		}
+
+		.footer {
+			margin-top: 10px;
+			color: var(--muted);
+			font-size: 13px;
+			text-align: center;
+			line-height: 1.5;
+		}
+
+		.footer a { color: var(--accent); text-decoration: none; }
+		.footer a:hover { text-decoration: underline; }
+	</style>
+</head>
+<body>
+	<main class="page">
+		<section class="hero">
+			<h1 id="app-title">Bacaan Bilal Sholat Tarawih</h1>
+			<p>Susunan bacaan bilal tarawih 11 rakaat (8 tarawih + 3 witir), lengkap dengan teks Arab, latin, terjemahan, dan tautan audio jika tersedia.</p>
+			<div class="toolbar">
+				<div class="group">
+					<label for="font-range">Ukuran Arab</label>
+					<input id="font-range" type="range" min="12" max="64" value="22" />
+				</div>
+				<div class="group">
+					<label for="theme-toggle">Tema</label>
+					<button id="theme-toggle" type="button">Mode Gelap</button>
+				</div>
+				<div class="group">
+					<span>Mode</span>
+					<button class="mode-btn" data-mode="bilal" type="button">Bilal</button>
+					<button class="mode-btn" data-mode="jamaah" type="button">Jamaah</button>
+				</div>
+			</div>
+		</section>
+
+		<section id="cards" class="cards" aria-live="polite">
+			<div class="empty">Memuat data...</div>
+		</section>
+
+		<footer class="footer" id="footer"></footer>
+	</main>
+
+	<script>
+		const state = {
+			theme: localStorage.getItem('theme') || 'dark',
+			arabicSize: Number(localStorage.getItem('arabicSize') || 22),
+			mode: localStorage.getItem('mode') || 'bilal',
+		};
+
+		async function loadData() {
+			try {
+				const res = await fetch('data.json');
+				if (!res.ok) throw new Error('Gagal memuat data');
+				const data = await res.json();
+				render(data);
+			} catch (err) {
+				const cards = document.getElementById('cards');
+				cards.innerHTML = '<div class="empty">Tidak dapat memuat data.</div>';
+				console.error(err);
+			}
+		}
+
+		function render(data) {
+			const cards = document.getElementById('cards');
+			const title = document.getElementById('app-title');
+			title.textContent = data.appTitle || 'Bacaan Bilal Sholat Tarawih';
+			const footer = document.getElementById('footer');
+			const parts = [];
+			if (data.source) parts.push(`Sumber: <a href="${data.source}" target="_blank" rel="noopener">${data.source}</a>`);
+			if (data.lastUpdated) parts.push(`Dibuat: ${data.lastUpdated}`);
+			footer.innerHTML = parts.join(' • ');
+
+			if (!data.items || !data.items.length) {
+				cards.innerHTML = '<div class="empty">Belum ada bacaan.</div>';
+				return;
+			}
+
+			cards.innerHTML = data.items.map(item => {
+				const hasAudio = Boolean(item.audio);
+				const fallbackRole = item.id === 5 ? 'bilal' : '';
+				const arabHtml = decorateLines(item.arab, true, fallbackRole);
+				const latinHtml = decorateLines(item.latin, false, fallbackRole);
+				const terjemahHtml = decorateLines(item.terjemahan, false, fallbackRole);
+				return `
+					<article class="card">
+						<div class="card-head">
+							<span class="badge">${item.id ?? ''}</span>
+							<div class="judul">${item.judul || ''}</div>
+						</div>
+						<div class="arabic">${arabHtml}</div>
+						<div class="latin"><strong>Latin:</strong> ${latinHtml}</div>
+						<div class="translate"><strong>Terjemahan:</strong> ${terjemahHtml}</div>
+						<div class="controls">
+							<button class="audio-btn" ${hasAudio ? '' : 'disabled'} data-audio="${item.audio || ''}">
+								${hasAudio ? 'Putar audio' : 'Audio belum tersedia'}
+							</button>
+						</div>
+					</article>
+				`;
+			}).join('');
+
+			cards.querySelectorAll('.audio-btn').forEach(btn => {
+				btn.addEventListener('click', () => {
+					const src = btn.dataset.audio;
+					if (!src) return;
+					const audio = new Audio(src);
+					audio.play().catch(() => {
+						btn.textContent = 'Gagal memutar audio';
+						btn.disabled = true;
+					});
+				});
+			});
+		}
+
+		function applyTheme() {
+			document.documentElement.setAttribute('data-theme', state.theme);
+			const btn = document.getElementById('theme-toggle');
+			btn.textContent = state.theme === 'dark' ? 'Mode Gelap' : 'Mode Terang';
+		}
+
+		function applyFontSize() {
+			const clamped = Math.min(Math.max(state.arabicSize, 12), 64);
+			state.arabicSize = clamped;
+			localStorage.setItem('arabicSize', clamped);
+			document.documentElement.style.setProperty('--arabic-size', `${clamped}px`);
+			document.getElementById('font-range').value = clamped;
+		}
+
+		function applyMode() {
+			document.body.setAttribute('data-mode', state.mode);
+			const buttons = document.querySelectorAll('.mode-btn');
+			buttons.forEach(btn => {
+				btn.classList.toggle('active', btn.dataset.mode === state.mode);
+			});
+			localStorage.setItem('mode', state.mode);
+		}
+
+		function setupControls() {
+			const fontRange = document.getElementById('font-range');
+			fontRange.addEventListener('input', (e) => {
+				state.arabicSize = Number(e.target.value);
+				localStorage.setItem('arabicSize', state.arabicSize);
+				applyFontSize();
+			});
+
+			const themeBtn = document.getElementById('theme-toggle');
+			themeBtn.addEventListener('click', () => {
+				state.theme = state.theme === 'dark' ? 'light' : 'dark';
+				localStorage.setItem('theme', state.theme);
+				applyTheme();
+			});
+
+			document.querySelectorAll('.mode-btn').forEach(btn => {
+				btn.addEventListener('click', () => {
+					state.mode = btn.dataset.mode;
+					applyMode();
+				});
+			});
+		}
+
+		function spawnSpark(x, y) {
+			const spark = document.createElement('span');
+			spark.className = 'spark';
+			spark.style.left = `${x}px`;
+			spark.style.top = `${y}px`;
+			document.body.appendChild(spark);
+			setTimeout(() => spark.remove(), 650);
+		}
+
+		function setupSparks() {
+			let last = 0;
+			window.addEventListener('mousemove', (e) => {
+				const now = Date.now();
+				if (now - last > 45) {
+					spawnSpark(e.clientX, e.clientY);
+					last = now;
+				}
+			});
+
+			window.addEventListener('scroll', () => {
+				const x = window.innerWidth * Math.random();
+				const y = (window.innerHeight * 0.25) + Math.random() * 80;
+				spawnSpark(x, y);
+			}, { passive: true });
+		}
+
+		function classifyRole(line) {
+			const t = (line || '').trim().toLowerCase();
+			if (t.includes('tahlil') || t.includes('لَا إِلٰهَ إِلَّا اللَّهُ') || t.includes('لا إله إلا الله')) return 'neutral';
+			if (t.includes('bilal (atau bersama-sama')) return 'neutral';
+			if (t.startsWith('lalu diteruskan dengan bacaan tahlil')) return 'neutral';
+			if (t.startsWith('jamaah')) return 'jamaah';
+			if (t.includes('jamaah menjawab')) return 'jamaah';
+			if (t.startsWith('bilal')) return 'bilal';
+			if (t.startsWith('seruan bilal')) return 'bilal';
+			if (t.startsWith('kemudian bilal')) return 'bilal';
+			return '';
+		}
+
+		function decorateLines(text, addCommas, fallbackRole = '') {
+			const lines = (text || '').split(/\n+/).filter(l => l.trim().length > 0);
+			let currentRole = fallbackRole;
+			return lines.map((line, idx) => {
+				const detected = classifyRole(line);
+				if (detected) currentRole = detected;
+				const role = currentRole;
+				const comma = addCommas && idx < lines.length - 1 ? '،' : '';
+				return `<span class="role ${role ? `role-${role}` : ''}">${line}${comma}</span>`;
+			}).join('<br>');
+		}
+
+		applyTheme();
+		applyFontSize();
+		applyMode();
+		setupControls();
+		setupSparks();
+		loadData();
+	</script>
+</body>
+</html>
