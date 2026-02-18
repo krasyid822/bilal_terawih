@@ -469,7 +469,11 @@
 			title.textContent = data.appTitle || 'Bacaan Bilal Sholat Tarawih';
 			const footer = document.getElementById('footer');
 			const parts = [];
-			if (data.source) parts.push(`Sumber: <a href="${data.source}" target="_blank" rel="noopener">${data.source}</a>`);
+			const sources = Array.isArray(data.source) ? data.source : (data.source ? [data.source] : []);
+			if (sources.length) {
+				const links = sources.map((s) => `<a href="${s}" target="_blank" rel="noopener">${s}</a>`).join(', ');
+				parts.push(`Sumber: ${links}`);
+			}
 			if (data.lastUpdated) parts.push(`Dibuat: ${data.lastUpdated}`);
 			footer.innerHTML = parts.join(' • ');
 
