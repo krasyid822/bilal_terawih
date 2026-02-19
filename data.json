@@ -1,5 +1,5 @@
 {
-	"appTitle": "Bacaan Bilal Sholat Tarawih 11 Rakaat (8 Tarawih + 3 Witir)",
+	"appTitle": "Bacaan Bilal dan Jamaah Sholat Tarawih 11 Rakaat (8 Tarawih + 3 Witir)",
 	"source": [
 		"https://desamanikin.id/bacaan-bilal-sholat-tarawih-lengkap-11-dan-23-rakaat-pdf-bisa-diunduh-di-sini/",
 		"https://grok.com/share/c2hhcmQtNA_c5862af2-c9a4-4ba8-8bcd-c515160f719b",
@@ -15,7 +15,7 @@
 			"arab": "سُبْحَانَ الْمَلِكِ الْمَعْبُودِ\nسُبْحَانَ الْمَلِكِ الْمَوْجُودِ\nسُبْحَانَ الْمَلِكِ الْحَيِّ الَّذِي لَا يَنَامُ وَلَا يَمُوْتُ وَلَا يَفُوْتُ أَبَدًا\nسُبُّوْحٌ قُدُوْسٌ رَبُّنَا وَرَبُّ الْمَلَائِكَةِ وَالرُّوْحِ\nسُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ\nوَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ\n",
 			"latin": "Subhaanal-malikil ma’buudi, subhaanal-malikil maujuudi, subhaanal-malikil hayyil ladzii laa yanaamu wa laa yamuutu wa laa yafuutu abadan. Subbuuhun qudduusun rabbunaa wa rabbul-malaa’ikati war-ruuh. Subhaanallaahi walhamdu lillaahi wa laa ilaaha illallaahu wallaahu akbar. Wa laa haula wa laa quwwata illaa billaahil ‘aliyyil ‘azhiim.",
 			"terjemahan": "Mahasuci Allah, Raja yang disembah, Mahasuci Allah, Raja yang selalu ada dan berwujud, Mahasuci Allah, Raja yang Maha Hidup, yang tidak pernah tidur, tidak pernah mati, serta tidak pernah hilang atau fana selama-lamanya; Maha Suci dan Maha Suci (Quddus) Tuhan kami serta Tuhan para malaikat dan Ruh (Jibril), Maha Suci Allah, segala puji bagi Allah, tiada Tuhan selain Allah, Allah Maha Besar, dan tiada daya serta upaya, tiada kekuatan kecuali dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung.",
-			"audio": null
+			"audio": "audio/bersama/0.opus"
 		},
 		{
 			"id": 1,
@@ -23,7 +23,10 @@
 			"arab": "Bilal:\n\nاللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ\n\nJamaah menjawab:\n\nاللَّهُمَّ صَلِّ وَسَلِّمْ عَلَيْهِ\n\nBilal:\n\nاللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا وَمَوْلَانَا مُحَمَّدٍ\n\nJamaah menjawab:\n\nاللَّهُمَّ صَلِّ وَسَلِّمْ عَلَيْهِ\n\nBilal:\n\nاللَّهُمَّ صَلِّ عَلَى سَيِّدِنَا وَنَبِيِّنَا وَحَبِيْبِنَا وَشَفِيْعِنَا وَذُخْرِنَا وَمَوْلَانَا مُحَمَّدٍ\n\nJamaah menjawab:\n\nاللَّهُمَّ صَلِّ وَسَلِّمْ عَلَيْهِ\n\nSeruan bilal memulai Tarawih\nBilal:\n\nصَلُّوا سُنَّةَ التَّرَاوِيحِ جَامِعَةً رَحِمَكُمُ اللَّهُ\n\nJamaah menjawab:\n\nالصَّلَاةُ لَا إِلٰهَ إِلَّا اللَّهُ\n",
 			"latin": "Bilal:\nAllāhumma shalli ‘alā sayyidinā Muḥammad.\nJamaah menjawab:\nAllāhumma shalli wa sallim ‘alaih.\nBilal:\nAllāhumma shalli ‘alā sayyidinā wa mawlānā Muḥammad.\nJamaah menjawab:\nAllāhumma shalli wa sallim ‘alaih.\nBilal:\nAllāhumma shalli ‘alā sayyidinā wa nabiyyinā wa ḥabībinā wa syafī‘inā wa dzukhrinā wa mawlānā Muḥammad.\nJamaah menjawab:\nAllāhumma shalli wa sallim ‘alaih.\nSeruan bilal memulai Tarawih\nBilal:\nShallū sunnatat tarāwīḥi jāmi‘atan raḥimakumullāh.\nJamaah menjawab:\nAsh-shalātu lā ilāha illallāh.",
 			"terjemahan": "Bilal:\nYa Allah, limpahkanlah rahmat kepada junjungan kami Muhammad.\nJamaah menjawab:\nYa Allah, limpahkanlah rahmat dan keselamatan kepadanya.\nBilal:\nYa Allah, limpahkanlah rahmat kepada junjungan kami dan pemimpin kami Muhammad.\nJamaah menjawab:\nYa Allah, limpahkanlah rahmat dan keselamatan kepadanya.\nBilal:\nYa Allah, limpahkanlah rahmat kepada junjungan kami, nabi kami, kekasih kami, pemberi syafaat kami, simpanan (kebaikan) kami, serta pemimpin kami Muhammad.\nJamaah menjawab:\nYa Allah, limpahkanlah rahmat dan keselamatan kepadanya.\nSeruan bilal memulai Tarawih\nBilal:\nKerjakanlah (dirikanlah) shalat sunnah Tarawih secara berjamaah, semoga Allah merahmati kalian.\nJamaah menjawab:\nAyo Shalat, tiada sesembahan selain Allah.",
-			"audio": null
+			"audio": {
+				"bilal" : "audio/bilal/1-bilal.opus",
+				"jamaah" : ""
+			}
 		},
 		{
 			"id": 2,
@@ -47,15 +50,18 @@
 			"arab": "Bilal:\n\nالخَلِيفَةُ الثَّانِيَةُ أَمِيْرُ الْمُؤْمِنِيْنَ سَيِّدُنَا عُمَرُ بْنُ الْخَطَّابِ\n\nJamaah menjawab:\n\nرَضِيَ اللَّهُ عَنْهُ\n",
 			"latin": "Bilal:\nAl-khalīfatuth-thāniyatu amīrul-mu'minīna sayyidunā 'umaru bnul-khaṭṭāb.\nJamaah menjawab:\nRaḍiyallāhu 'anhu.",
 			"terjemahan": "Bilal:\nKhalifah yang kedua, Amirul Mukminin (Pemimpin kaum mukminin), junjungan kami Umar bin al-Khattab.\nJamaah menjawab:\nSemoga Allah meridhainya.",
-			"audio": null
+			"audio": {
+				"bilal" : "audio/bilal/4-bilal.opus",
+				"jamaah" : ""
+			}
 		},
 		{
 			"id": 5,
 			"judul": "Bacaan bilal setelah selesai Tarawih 8 rakaat (Bilal membaca doa kamilin:)",
-			"arab": "\nاَللّٰهُمَّ اجْعَلْنَا بِالْإِيْمَانِ كَامِلِيْنَ، وَلِلْفَرَائِضِ مُؤَدِّيْنَ، وَلِلصَّلَاةِ حَافِظِيْنَ، وَلِلزَّكَاةِ فَاعِلِيْنَ، وَلِمَا عِنْدَكَ طَالِبِيْنَ، وَلِعَفْوِكَ رَاجِيْنَ، وَبِالْهُدَى مُتَمَسِّكِيْنَ، وَعَنِ اللَّغْوِ مُعْرِضِيْنَ، وَفِي الدُّنْيَا زَاهِدِيْنَ، وَفِي الْاٰخِرَةِ رَاغِبِيْنَ، وَبِالْقَضَاءِ رَاضِيْنَ، وَلِلنَّعْمَاءِ شَاكِرِيْنَ، وَعَلَى الْبَلَاءِ صَابِرِيْنَ، وَتَحْتَ لِوَاءِ مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يَوْمَ الْقِيَامَةِ سَائِرِيْنَ، وَعَلَى الْحَوْضِ وَارِدِيْن، وَإِلَى الْجَنَّةِ دَاخِلِيْنَ، وَمِنَ النَّارِ نَاجِيْنَ، وَعَلَى سَرِيْرِ الْكَرَامَةِ قَاعِدِيْنَ، وَبِحُوْرٍعِيْنٍ مُتَزَوِّجِيْنَ، وَمِنْ سُنْدُسٍ وَاِسْتَبْرَقٍ وَدِيْبَاجٍ مُتَلَبِّسِيْنَ، وَمِنْ طَعَامِ الْجَنَّةِ آكِلِيْنَ، وَمِنْ لَبَنٍ وَعَسَلٍ مُصَفًّى شَارِبِيْنَ، بِأَكْوَابٍ وَّأَبَارِيْقَ وَكَأْسٍ مِّنْ مَعِيْنٍ مَعَ الَّذِيْنَ أَنْعَمْتَ عَلَيْهِمْ مِنَ النَّبِيِّيْنَ وَالصِّدِّيْقِيْنَ وَالشُّهَدَاءِ وَالصَّالِحِيْنَ وَحَسُنَ أُولئِكَ رَفِيْقًا، ذٰلِكَ الْفَضْلُ مِنَ اللهِ وَكَفَى بِاللهِ عَلِيْمًا، اَللّٰهُمَّ اجْعَلْنَا فِي هٰذِهِ لَيْلَةِ الشَّهْرِ الشَّرِيْفَةِ الْمُبَارَكَةِ مِنَ السُّعَدَاءِ الْمَقْبُوْلِيْنَ، وَلَا تَجْعَلْنَا مِنَ اْلأَشْقِيَاءِ الْمَرْدُوْدِيْنَ، وَصَلَّى اللهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَاٰلِه وَصَحْبِهِ أَجْمَعِيْنَ، بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِيْنَ، وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ\n",
+			"arab": "\nاَللّٰهُمَّ اجْعَلْنَا بِالْإِيمَانِ كَامِلِينَ، وَلِلْفَرَائِضِ مُؤَدِّينَ، وَلِلصَّلَاةِ حَافِظِينَ، وَلِلزَّكَاةِ فَاعِلِينَ، وَلِمَا عِنْدَكَ طَالِبِينَ، وَلِعَفْوِكَ رَاجِينَ، وَبِالْهُدَى مُتَمَسِّكِينَ، وَعَنِ اللَّغْوِ مُعْرِضِينَ، وَفِي الدُّنْيَا زَاهِدِينَ، وَفِي الْآخِرَةِ رَاغِبِينَ، وَبِالْقَضَاءِ رَاضِينَ، وَلِلنَّعْمَاءِ شَاكِرِينَ، وَعَلَى الْبَلَاءِ صَابِرِينَ، وَتَحْتَ لِوَاءِ مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ يَوْمَ الْقِيَامَةِ سَائِرِينَ، وَعَلَى الْحَوْضِ وَارِدِينَ، وَإِلَى الْجَنَّةِ دَاخِلِينَ، وَمِنَ النَّارِ نَاجِينَ، وَعَلَى سَرِيرِ الْكَرَامَةِ قَاعِدِينَ، وَبِحُورٍ عِينٍ مُتَزَوِّجِينَ، وَمِنْ سُنْدُسٍ وَإِسْتَبْرَقٍ وَدِيبَاجٍ مُتَلَبِّسِينَ، وَمِنْ طَعَامِ الْجَنَّةِ آكِلِينَ، وَمِنْ لَبَنٍ وَعَسَلٍ مُصَفًّى شَارِبِينَ، بِأَكْوَابٍ وَأَبَارِيقَ وَكَأْسٍ مِنْ مَعِينٍ، مَعَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ مِنَ النَّبِيِّينَ وَالصِّدِّيقِينَ وَالشُّهَدَاءِ وَالصَّالِحِينَ وَحَسُنَ أُولَئِكَ رَفِيقًا، ذَلِكَ الْفَضْلُ مِنَ اللّٰهِ وَكَفَى بِاللّٰهِ عَلِيمًا، اَللّٰهُمَّ اجْعَلْنَا فِي هَٰذِهِ اللَّيْلَةِ الشَّهْرِ الشَّرِيفَةِ الْمُبَارَكَةِ مِنَ السُّعَدَاءِ الْمَقْبُولِينَ، وَلَا تَجْعَلْنَا مِنَ الْأَشْقِيَاءِ الْمَرْدُودِينَ، وَصَلَّى اللّٰهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ أَجْمَعِينَ، بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ، وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ.\n",
 			"latin": "Allâhummaj’alnâ bil îmâni kâmilîn. Wa lil farâidli muaddîn. Wa lish-shlâti hâfidhîn. Wa liz-zakâti fâ’ilîn. Wa lima ‘indaka thâlibîn. Wa li ‘afwika râjîn. Wa bil-hudâ mutamassikîn. Wa ‘anil laghwi mu’ridlîn. Wa fid-dunyâ zâhdîn. Wa fil ‘âkhirati râghibîn. Wa bil-qadlâ’i râdlîn. Wa lin na’mâ’i syâkirîn. Wa ‘alal balâ’i shâbirîn. Wa tahta liwâ’i muhammadin shallallâhu ‘alaihi wasallam yaumal qiyâmati sâ’irîna wa alal haudli wâridîn. Wa ilal jannati dâkhilîn. Wa minan nâri nâjîn. Wa ‘alâ sariirl karâmati qâ’idîn. Wa bi hûrun ‘in mutazawwijîn. Wa min sundusin wa istabraqîn wadîbâjin mutalabbisîn. Wa min tha’âmil jannati âkilîn. Wa min labanin wa ‘asalin mushaffan syâribîn. Bi akwâbin wa abârîqa wa ka’sin min ma’în. Ma’al ladzîna an’amta ‘alaihim minan nabiyyîna wash shiddîqîna wasy syuhadâ’i wash shâlihîna wa hasuna ulâ’ika rafîqan. Dâlikal fadl-lu minallâhi wa kafâ billâhi ‘alîman. Allâhummaj’alnâ fî hâdzihil lailatisy syahrisy syarîfail mubârakah minas su’adâ’il maqbûlîn. Wa lâ taj’alnâ minal asyqiyâ’il mardûdîn. Wa shallallâhu ‘alâ sayyidinâ muhammadin wa âlihi wa shahbihi ajma’în. Birahmatika yâ arhamar râhimîn wal hamdulillâhi rabbil ‘âlamîn.",
 			"terjemahan": "Ya Allah, jadikanlah kami orang-orang yang sempurna imannya, yang memenuhi kewajiban-kewajiban, yang memelihara sholat, yang menunaikan zakat, yang mencari apa yang ada di sisi-Mu, yang mengharapkan ampunan-Mu, yang berpegang teguh pada petunjuk-Mu, yang berpaling dari segala kebatilan, yang zuhud di dunia, yang rindu pada kehidupan akhirat, yang ridha atas segala ketentuan-Mu, yang senantiasa bersyukur atas nikmat, yang bersabar menghadapi musibah, yang berjalan di bawah panji Nabi Muhammad SAW pada hari kiamat, yang mendatangi telaga beliau, yang masuk ke dalam surga, yang selamat dari api neraka, yang duduk di atas singgasana kemuliaan, yang berpasangan dengan para bidadari, yang mengenakan beragam sutra halus, yang menikmati makanan surga, yang meminum susu dan madu murni dari gelas dan cawan yang mengalir, bersama orang-orang yang Engkau anugerahi nikmat dari kalangan para nabi, shiddiqin, syuhada, dan orang-orang salih. Mereka adalah sebaik-baik teman. Itulah karunia dari Allah, dan cukuplah Allah sebagai Dzat yang Maha Mengetahui. Ya Allah, jadikanlah kami pada malam yang mulia dan penuh berkah ini termasuk golongan orang-orang yang berbahagia dan diterima amalnya, dan janganlah Engkau masukkan kami ke dalam golongan orang-orang yang celaka dan ditolak amalnya. Semoga Allah melimpahkan rahmat-Nya kepada junjungan kami Nabi Muhammad beserta seluruh keluarga dan sahabat beliau. Berkat rahmat-Mu, wahai Dzat yang paling pengasih di antara semua yang pengasih. Segala puji hanya milik Allah, Tuhan seluruh alam.",
-			"audio": null
+			"audio": "audio/bilal/5.opus"
 		},
 		{
 			"id": 6,
@@ -63,7 +69,10 @@
 			"arab": "Bilal:\n\nالخَلِيفَةُ الرَّابِعَةُ أَمِيْرُ الْمُؤْمِنِيْنَ سَيِّدُنَا عَلِيُّ بْنُ أَبِي طَالِبٍ\n\nJamaah menjawab:\n\nرَضِيَ اللَّهُ عَنْهُ\n\nKemudian bilal menyerukan Witir:\n\nصَلُّوا سُنَّةَ الْوِتْرِ جَامِعَةً أَثَابَكُمُ اللَّهُ\n\nJamaah menjawab:\n\nالصَّلَاةُ لَا إِلٰهَ إِلَّا اللَّهُ\n",
 			"latin": "Bilal:\nAl-khalīfaturr-rābi‘atu amīrul-mu'minīna sayyidunā ‘aliyyu bnū abī ṭālib.\nJamaah menjawab:\nRaḍiyallāhu 'anhu.\nKemudian bilal menyerukan Witir:\nBilal:\nShallū sunnatal-witri jāmi‘atan athābakumullāh.\nJamaah menjawab:\nAsh-shalātu lā ilāha illallāh.",
 			"terjemahan": "Bilal:\nKhalifah yang keempat, Amirul Mukminin (Pemimpin kaum mukminin), junjungan kami Ali bin Abi Thalib.\nJamaah menjawab:\nSemoga Allah meridhainya.\nKemudian bilal menyerukan Witir:\nBilal:\nKerjakanlah (dirikanlah) shalat sunnah Witir secara berjamaah, semoga Allah memberikan pahala kepada kalian.\nJamaah menjawab:\nAyo Shalat, tiada sesembahan selain Allah.",
-			"audio": null
+			"audio": {
+				"bilal" : "audio/bilal/6-bilal.opus",
+				"jamaah": ""
+			}
 		},
 		{
 			"id": 7,
@@ -76,10 +85,10 @@
 		{
 			"id": 8,
 			"judul": "Doa selesai Witir dan Tarawih",
-			"arab": "Doa 1:\n\nنَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانِ هذِهِ السَّنَةِ لِلهِ تَعَالَى\n\nDoa 2:\n\nسُبْحَانَ الْمَلِكِ الْقُدُّوسِ (3x)\n",
+			"arab": "Doa 1:\n\nنَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَٰذِهِ السَّنَةِ لِلَّهِ تَعَالَى\n\nDoa 2:\n\nسُبْحَانَ الْمَلِكِ الْقُدُّوسِ (3x)\n",
 			"latin": "Doa 1:\nNawaitu ṣauma ghadin ‘an adā’i farḍi syahri Ramaḍāna hādzihissanati lillāhi ta‘ālā.\nDoa 2:\nSubḥānal-malikil-quddūs. (3x)",
 			"terjemahan": "Doa 1:\nAku berniat puasa esok hari untuk menunaikan kewajiban (fardhu) puasa bulan Ramadhan tahun ini karena Allah Ta'ala.\nDoa 2:\nMahasuci (Allah) Raja yang Maha Suci / Maha Kudus. (3x)",
-			"audio": null
+			"audio": "audio/bersama/8.opus"
 		}
 	]
 }

@@ -355,16 +355,16 @@
 		}
 
 		.witir-pill {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			padding: 4px 10px;
-			border-radius: 999px;
-			background: var(--badge-bg);
-			border: 1px solid var(--badge-border);
-			color: var(--badge-text);
-			font-weight: 700;
-			font-size: 12px;
+			display: inline-block;
+			padding: 4px 8px;
+			border-radius: 6px;
+			background: transparent;
+			border: 1px solid var(--card-border);
+			color: var(--muted);
+			font-weight: 600;
+			font-size: 13px;
+			line-height: 1;
+			vertical-align: middle;
 		}
 
 		button.audio-btn {
@@ -436,7 +436,7 @@
 	<main class="page">
 		<section class="hero">
 			<h1 id="app-title">Bacaan Bilal Sholat Tarawih</h1>
-			<p>Susunan bacaan bilal tarawih 11 rakaat (8 tarawih + 3 witir), lengkap dengan teks Arab, latin, terjemahan, dan tautan audio jika tersedia.</p>
+			<p>Susunan bacaan bilal tarawih 11 rakaat (8 tarawih + 3 witir), lengkap dengan teks Arab, latin, terjemahan, dan tautan audio jika tersedia. Kontrol audio: tekan 1x mulai/jeda, 3x reset.</p>
 			<div class="toolbar">
 				<div class="group">
 					<label for="font-range">Ukuran Arab</label>
@@ -475,6 +475,7 @@
 		};
 
 		let dataCache = null;
+		const player = { audio: null, btn: null, lastClick: 0, src: '' };
 
 		async function loadData() {
 			try {
@@ -523,7 +524,8 @@
 			}
 
 			cards.innerHTML = items.map(item => {
-				const hasAudio = Boolean(item.audio);
+				const audioSrc = resolveAudio(item.audio);
+				const hasAudio = Boolean(audioSrc);
 				const fallbackRole = item.id === 5 ? 'bilal' : '';
 				const arabHtml = decorateLines(item.arab, true, fallbackRole);
 				const latinHtml = decorateLines(item.latin, false, fallbackRole);
@@ -540,7 +542,7 @@
 						<div class="translate"><strong>Terjemahan:</strong> ${terjemahHtml}</div>
 						${witirNote}
 						<div class="controls">
-							<button class="audio-btn" ${hasAudio ? '' : 'disabled'} data-audio="${item.audio || ''}">
+							<button class="audio-btn" ${hasAudio ? '' : 'disabled'} data-audio="${audioSrc}">
 								${hasAudio ? 'Putar audio' : 'Audio belum tersedia'}
 							</button>
 						</div>
@@ -549,15 +551,7 @@
 			}).join('');
 
 			cards.querySelectorAll('.audio-btn').forEach(btn => {
-				btn.addEventListener('click', () => {
-					const src = btn.dataset.audio;
-					if (!src) return;
-					const audio = new Audio(src);
-					audio.play().catch(() => {
-						btn.textContent = 'Gagal memutar audio';
-						btn.disabled = true;
-					});
-				});
+				btn.addEventListener('click', () => handleAudioClick(btn));
 			});
 		}
 
@@ -581,6 +575,7 @@
 				btn.classList.toggle('active', btn.dataset.mode === state.mode);
 			});
 			localStorage.setItem('mode', state.mode);
+			if (dataCache) render(dataCache);
 		}
 
 		function applyWitirMode() {
@@ -662,6 +657,65 @@
 			return '';
 		}
 
+		function resolveAudio(audioValue) {
+			if (!audioValue) return '';
+			if (typeof audioValue === 'string') return audioValue;
+			if (typeof audioValue === 'object') {
+				return audioValue[state.mode] || '';
+			}
+			return '';
+		}
+
+		function stopCurrent() {
+			if (player.audio) {
+				player.audio.pause();
+				player.audio.currentTime = 0;
+			}
+			if (player.btn) player.btn.textContent = 'Putar audio';
+			player.audio = null;
+			player.btn = null;
+			player.src = '';
+		}
+
+		function handleAudioClick(btn) {
+			const src = btn.dataset.audio;
+			if (!src) return;
+			const now = Date.now();
+			const rapidThreshold = 450;
+
+			if (player.audio && player.src === src && player.btn === btn) {
+				const delta = now - player.lastClick;
+				player.lastClick = now;
+				if (!player.audio.paused && delta < rapidThreshold) {
+					stopCurrent();
+					return;
+				}
+				if (player.audio.paused) {
+					player.audio.play().catch(() => stopCurrent());
+					btn.textContent = 'Jeda';
+				} else {
+					player.audio.pause();
+					btn.textContent = 'Putar audio';
+				}
+				return;
+			}
+
+			stopCurrent();
+			const audio = new Audio(src);
+			player.audio = audio;
+			player.btn = btn;
+			player.src = src;
+			player.lastClick = now;
+			btn.textContent = 'Jeda';
+
+			audio.addEventListener('ended', () => stopCurrent());
+			audio.play().catch(() => {
+				btn.textContent = 'Gagal memutar audio';
+				btn.disabled = true;
+				stopCurrent();
+			});
+		}
+
 		function witirDescription() {
 			return state.witirMode === '2-1'
 				? '2 rakaat salam, lanjut 1 rakaat salam (dua salam).'
@@ -671,7 +725,7 @@
 		function buildWitirNote() {
 			return `
 				<div class="witir-note">
-					<span class="witir-pill">Mode Witir</span>
+					<span class="witir-pill">Mode Witir dipilih:</span>
 					<span>${witirDescription()}</span>
 				</div>
 			`;
