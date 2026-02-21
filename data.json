@@ -3,7 +3,8 @@
   "appDescription": "Susunan bacaan bilal tarawih 11 rakaat (8 tarawih + 3 witir), lengkap dengan teks Arab, latin, terjemahan, dan tautan audio jika tersedia. Kontrol audio: tekan 1x mulai/jeda, 3x reset. Bilal 2 adalah yang bertugas membaca bagian doa-doa jika ditempat Anda memakai dua bilal.",
   "source": [
     "quran.com",
-    "https://grok.com/c/9ab122d6-308f-4e4a-afde-587cd565169e?rid=dc77e5d0-900b-4eff-89a4-4c6a0695f000"
+    "https://grok.com/c/9ab122d6-308f-4e4a-afde-587cd565169e?rid=dc77e5d0-900b-4eff-89a4-4c6a0695f000",
+    "https://github.com/krasyid822/Drive/releases/download/drive/Lembaran.Zikir.Shalawat.dan.Doa.untuk.Terawih.dan.Witir.7z"
   ],
   "lastUpdated": "2026-02-21 10:04",
   "witir3HiddenIds": [5],

@@ -211,6 +211,13 @@
 					<textarea id="sources" class="textarea-compact" placeholder="https://…"></textarea>
 					<span class="small">Jika kosong, sumber akan dihilangkan.</span>
 				</label>
+				<label>Deskripsi hero (paragraf di halaman utama)
+					<textarea id="app-desc" class="textarea-compact" placeholder="Deskripsi singkat"></textarea>
+				</label>
+				<label>ID disembunyikan saat witir 3 (pisahkan dengan koma/spasi)
+					<input id="witir-hidden" type="text" placeholder="contoh: 5 7" />
+					<span class="small">Hanya berlaku saat mode witir = 3 rakaat.</span>
+				</label>
 			</div>
 		</div>
 
@@ -252,6 +259,8 @@
 					appTitle: parsed.appTitle || '',
 					source: Array.isArray(parsed.source) ? parsed.source : (parsed.source ? [parsed.source] : []),
 					lastUpdated: parsed.lastUpdated || '',
+					appDescription: parsed.appDescription || '',
+					witir3HiddenIds: Array.isArray(parsed.witir3HiddenIds) ? parsed.witir3HiddenIds.map(Number).filter(Number.isFinite) : [],
 					items: normalizeItems(parsed.items || []),
 				};
 				fillTopFields();
@@ -498,6 +507,18 @@
 				saveDraft();
 			});
 
+			document.getElementById('app-desc').addEventListener('input', (e) => {
+				if (!state.data) return;
+				state.data.appDescription = e.target.value;
+				saveDraft();
+			});
+
+			document.getElementById('witir-hidden').addEventListener('input', (e) => {
+				if (!state.data) return;
+				state.data.witir3HiddenIds = parseHiddenIds(e.target.value);
+				saveDraft();
+			});
+
 			document.getElementById('sources').addEventListener('input', (e) => {
 				if (!state.data) return;
 				const lines = e.target.value.split(/\n+/).map(l => l.trim()).filter(Boolean);
@@ -512,6 +533,8 @@
 				appTitle: state.data.appTitle || '',
 				source: state.data.source || [],
 				lastUpdated: state.data.lastUpdated || '',
+				appDescription: state.data.appDescription || '',
+				witir3HiddenIds: state.data.witir3HiddenIds || [],
 				items: denormalizeItems(state.data.items),
 			};
 			return JSON.stringify(payload, null, 2);
@@ -530,6 +553,8 @@
 					appTitle: json.appTitle || '',
 					source: Array.isArray(json.source) ? json.source : (json.source ? [json.source] : []),
 					lastUpdated: json.lastUpdated || '',
+					appDescription: json.appDescription || '',
+					witir3HiddenIds: Array.isArray(json.witir3HiddenIds) ? json.witir3HiddenIds.map(Number).filter(Number.isFinite) : [],
 					items: normalizeItems(json.items || []),
 				};
 				fillTopFields();
@@ -550,6 +575,8 @@
 				appTitle: json.appTitle || '',
 				source: Array.isArray(json.source) ? json.source : (json.source ? [json.source] : []),
 				lastUpdated: json.lastUpdated || '',
+				appDescription: json.appDescription || '',
+				witir3HiddenIds: Array.isArray(json.witir3HiddenIds) ? json.witir3HiddenIds.map(Number).filter(Number.isFinite) : [],
 				items: normalizeItems(json.items || []),
 			};
 			fillTopFields();
@@ -561,6 +588,15 @@
 			document.getElementById('app-title').value = state.data.appTitle || '';
 			document.getElementById('last-updated').value = state.data.lastUpdated || '';
 			document.getElementById('sources').value = (state.data.source || []).join('\n');
+			document.getElementById('app-desc').value = state.data.appDescription || '';
+			document.getElementById('witir-hidden').value = (state.data.witir3HiddenIds || []).join(' ');
+		}
+
+		function parseHiddenIds(text = '') {
+			return text
+				.split(/[^0-9]+/)
+				.map(Number)
+				.filter(Number.isFinite);
 		}
 
 		function disableServiceWorker() {
