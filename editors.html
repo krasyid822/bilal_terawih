@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Editor data.json</title>
+	<style>
+		@font-face {
+			font-family: "ArabicUI";
+			src: url("font.woff2") format("woff2");
+			font-weight: 400 700;
+			font-display: swap;
+		}
+
+		:root {
+			color-scheme: light dark;
+			--bg: #0c1220;
+			--card: rgba(255, 255, 255, 0.06);
+			--text: #e9eef8;
+			--muted: #b7c3d6;
+			--accent: #9ac7ff;
+			--border: rgba(255, 255, 255, 0.12);
+			--shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+			--input: rgba(255, 255, 255, 0.04);
+			--green: #7ddc9a;
+			--red: #ff9b9b;
+			--arabic-size: 20px;
+		}
+
+		[data-theme="light"] {
+			--bg: #fff7ec;
+			--card: #ffffff;
+			--text: #2c1c0f;
+			--muted: #6a4b38;
+			--accent: #d66a00;
+			--border: rgba(150, 110, 70, 0.28);
+			--shadow: 0 10px 26px rgba(150, 110, 70, 0.18);
+			--input: rgba(0, 0, 0, 0.04);
+			--green: #1f9d55;
+			--red: #d64545;
+		}
+
+		body {
+			margin: 0;
+			background: var(--bg);
+			color: var(--text);
+			font-family: "Manrope", system-ui, -apple-system, sans-serif;
+			padding: 24px 16px 48px;
+		}
+
+		.page {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.header {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+		}
+
+		.title {
+			font-size: 22px;
+			font-weight: 800;
+			letter-spacing: 0.2px;
+		}
+
+		.actions {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		button {
+			appearance: none;
+			border: 1px solid var(--border);
+			background: var(--card);
+			color: var(--text);
+			padding: 10px 12px;
+			border-radius: 10px;
+			font-weight: 700;
+			cursor: pointer;
+			transition: transform 120ms ease, border-color 120ms ease, background 160ms ease;
+		}
+
+		button.primary { background: linear-gradient(135deg, rgba(154, 199, 255, 0.35), rgba(12, 18, 32, 0.8)); border-color: rgba(255, 255, 255, 0.2); }
+		button.danger { border-color: rgba(255, 155, 155, 0.4); color: var(--red); }
+		button:disabled { opacity: 0.55; cursor: not-allowed; }
+		button:hover { transform: translateY(-1px); border-color: rgba(255, 255, 255, 0.2); }
+		button:active { transform: translateY(0); }
+
+		.card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 14px;
+			padding: 14px 14px 12px;
+			box-shadow: var(--shadow);
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 12px;
+		}
+
+		label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; color: var(--text); font-size: 13px; }
+		.small { font-size: 12px; color: var(--muted); font-weight: 600; }
+		input, textarea, select {
+			background: var(--input);
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			padding: 10px 12px;
+			color: var(--text);
+			font-family: inherit;
+			font-size: 14px;
+			resize: vertical;
+		}
+
+		textarea { min-height: 96px; line-height: 1.5; }
+		.textarea-compact { min-height: 64px; }
+
+		.arabic-input {
+			font-family: "ArabicUI", "Scheherazade", serif;
+			direction: rtl;
+			text-align: right;
+			font-size: var(--arabic-size);
+			line-height: 1.7;
+		}
+
+		.item-row {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 12px;
+			align-items: start;
+		}
+
+		.item-meta {
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.badge {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 34px;
+			height: 32px;
+			padding: 0 10px;
+			border-radius: 9px;
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid var(--border);
+			font-weight: 800;
+		}
+
+		.status { font-size: 13px; color: var(--muted); }
+		.status.ok { color: var(--green); }
+		.status.err { color: var(--red); }
+
+		.toolbar-lite {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			align-items: center;
+		}
+
+		.audio-mode {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 10px;
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<header class="header">
+			<div class="title">Editor data.json</div>
+			<div class="actions">
+				<button class="primary" id="btn-copy">Copy JSON</button>
+				<button class="primary" id="btn-download">Download JSON</button>
+				<button id="btn-reload">Muat ulang</button>
+				<button id="btn-theme" type="button">Tema: Gelap</button>
+				<label style="gap:6px; align-items:center; flex-direction:row; font-weight:700; color:var(--text);" for="file-input">
+					<span class="small">Impor</span>
+					<input id="file-input" type="file" accept="application/json" style="display:none;" />
+					<button type="button">Pilih file…</button>
+				</label>
+				<label style="display:flex; align-items:center; gap:8px; font-weight:700; color:var(--text);">
+					<span class="small">Ukuran Arab</span>
+					<input id="arabic-size" type="range" min="14" max="44" value="20" />
+				</label>
+			</div>
+		</header>
+
+		<div class="card">
+			<div class="grid">
+				<label>Judul aplikasi
+					<input id="app-title" type="text" placeholder="Judul" />
+				</label>
+				<label>Tanggal diperbarui
+					<input id="last-updated" type="text" placeholder="YYYY-MM-DD HH:mm" />
+				</label>
+				<label>Sumber (tiap baris satu tautan)
+					<textarea id="sources" class="textarea-compact" placeholder="https://…"></textarea>
+					<span class="small">Jika kosong, sumber akan dihilangkan.</span>
+				</label>
+			</div>
+		</div>
+
+		<div class="toolbar-lite">
+			<button class="primary" id="btn-add">+ Tambah item</button>
+			<span class="status" id="status">Menunggu data…</span>
+		</div>
+
+		<div id="items"></div>
+	</main>
+
+	<script>
+		const state = { data: null };
+		const statusEl = document.getElementById('status');
+		const itemsEl = document.getElementById('items');
+		const arabSizeInput = document.getElementById('arabic-size');
+		const themeBtn = document.getElementById('btn-theme');
+
+		function setStatus(msg, cls = '') {
+			statusEl.textContent = msg;
+			statusEl.className = `status ${cls}`.trim();
+		}
+
+		function saveDraft() {
+			if (!state.data) return;
+			try {
+				localStorage.setItem('editorDraft', JSON.stringify(state.data));
+			} catch (err) {
+				console.warn('Gagal menyimpan draft', err);
+			}
+		}
+
+		function loadDraft() {
+			const raw = localStorage.getItem('editorDraft');
+			if (!raw) return false;
+			try {
+				const parsed = JSON.parse(raw);
+				state.data = {
+					appTitle: parsed.appTitle || '',
+					source: Array.isArray(parsed.source) ? parsed.source : (parsed.source ? [parsed.source] : []),
+					lastUpdated: parsed.lastUpdated || '',
+					items: normalizeItems(parsed.items || []),
+				};
+				fillTopFields();
+				renderItems();
+				setStatus('Draft dipulihkan.', 'ok');
+				return true;
+			} catch (err) {
+				console.warn('Gagal memuat draft', err);
+				localStorage.removeItem('editorDraft');
+				return false;
+			}
+		}
+
+		function applyTheme(theme) {
+			const next = theme || localStorage.getItem('editorTheme') || 'dark';
+			document.documentElement.setAttribute('data-theme', next);
+			themeBtn.textContent = `Tema: ${next === 'light' ? 'Terang' : 'Gelap'}`;
+			localStorage.setItem('editorTheme', next);
+		}
+
+		function bindTheme() {
+			themeBtn.addEventListener('click', () => {
+				const current = document.documentElement.getAttribute('data-theme') || 'dark';
+				applyTheme(current === 'dark' ? 'light' : 'dark');
+			});
+		}
+
+		function loadArabicSize() {
+			const saved = Number(localStorage.getItem('editorArabicSize'));
+			const size = Number.isFinite(saved) ? saved : 20;
+			document.documentElement.style.setProperty('--arabic-size', `${size}px`);
+			arabSizeInput.value = size;
+		}
+
+		function bindArabicSize() {
+			arabSizeInput.addEventListener('input', (e) => {
+				const size = Number(e.target.value);
+				document.documentElement.style.setProperty('--arabic-size', `${size}px`);
+				localStorage.setItem('editorArabicSize', size);
+				autoResizeAll();
+			});
+		}
+
+		function normalizeItems(items = []) {
+			return items.map((item, idx) => {
+				const audioVal = item.audio;
+				let audioMode = 'single';
+				let audioSingle = '';
+				let audioBilal = '';
+				let audioJamaah = '';
+				if (audioVal && typeof audioVal === 'object') {
+					audioMode = 'split';
+					audioBilal = audioVal.bilal || '';
+					audioJamaah = audioVal.jamaah || '';
+				} else {
+					audioSingle = audioVal || '';
+				}
+				return {
+					id: item.id ?? idx,
+					judul: item.judul || '',
+					arab: item.arab || '',
+					latin: item.latin || '',
+					terjemahan: item.terjemahan || '',
+					audioMode,
+					audioSingle,
+					audioBilal,
+					audioJamaah,
+				};
+			});
+		}
+
+		function denormalizeItems(items = []) {
+			return items.map(it => {
+				const out = {
+					id: Number(it.id) || 0,
+					judul: it.judul || '',
+					arab: it.arab || '',
+					latin: it.latin || '',
+					terjemahan: it.terjemahan || '',
+				};
+				if (it.audioMode === 'split') {
+					out.audio = { bilal: it.audioBilal || '', jamaah: it.audioJamaah || '' };
+				} else {
+					out.audio = it.audioSingle || '';
+				}
+				return out;
+			});
+		}
+
+		function renderItems() {
+			if (!state.data) return;
+			itemsEl.innerHTML = state.data.items.map((item, idx) => {
+				return `
+					<div class="card" data-idx="${idx}">
+						<div class="item-meta">
+							<span class="badge">#${item.id}</span>
+							<label style="max-width:200px; flex:1;">
+								<span>ID</span>
+								<input data-field="id" type="number" value="${item.id}" />
+							</label>
+							<button class="danger" data-action="delete">Hapus</button>
+						</div>
+						<label>Judul
+							<input data-field="judul" type="text" value="${escapeHtml(item.judul)}" />
+						</label>
+						<label>Arab
+							<textarea data-field="arab" class="arabic-input">${escapeHtml(item.arab)}</textarea>
+						</label>
+						<label>Latin
+							<textarea data-field="latin">${escapeHtml(item.latin)}</textarea>
+						</label>
+						<label>Terjemahan
+							<textarea data-field="terjemahan">${escapeHtml(item.terjemahan)}</textarea>
+						</label>
+						<div class="audio-mode">
+							<label>Mode audio
+								<select data-field="audioMode">
+									<option value="single" ${item.audioMode === 'single' ? 'selected' : ''}>Satu sumber</option>
+									<option value="split" ${item.audioMode === 'split' ? 'selected' : ''}>Bilal & Jamaah</option>
+								</select>
+							</label>
+							<label>Audio (umum)
+								<input data-field="audioSingle" type="text" value="${escapeHtml(item.audioSingle)}" />
+							</label>
+							<label>Audio Bilal
+								<input data-field="audioBilal" type="text" value="${escapeHtml(item.audioBilal)}" />
+							</label>
+							<label>Audio Jamaah
+								<input data-field="audioJamaah" type="text" value="${escapeHtml(item.audioJamaah)}" />
+							</label>
+						</div>
+					</div>
+				`;
+			}).join('');
+			autoResizeAll();
+		}
+
+		function escapeHtml(str = '') {
+			return String(str)
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;');
+		}
+
+		function resizeTextarea(el) {
+			if (!el) return;
+			el.style.height = 'auto';
+			el.style.height = `${el.scrollHeight + 2}px`;
+		}
+
+		function autoResizeAll() {
+			itemsEl.querySelectorAll('textarea').forEach(resizeTextarea);
+		}
+
+		function bindEvents() {
+			document.getElementById('btn-add').addEventListener('click', () => {
+				if (!state.data) return;
+				const nextId = (state.data.items[state.data.items.length - 1]?.id ?? 0) + 1;
+				state.data.items.push({ id: nextId, judul: '', arab: '', latin: '', terjemahan: '', audioMode: 'single', audioSingle: '', audioBilal: '', audioJamaah: '' });
+				renderItems();
+				setStatus('Item ditambahkan.', 'ok');
+				saveDraft();
+			});
+
+			itemsEl.addEventListener('input', (e) => {
+				const card = e.target.closest('.card');
+				if (!card || !state.data) return;
+				const idx = Number(card.dataset.idx);
+				const field = e.target.dataset.field;
+				if (!field) return;
+				state.data.items[idx][field] = e.target.value;
+				if (e.target.tagName === 'TEXTAREA') resizeTextarea(e.target);
+				saveDraft();
+			});
+
+			itemsEl.addEventListener('change', (e) => {
+				const card = e.target.closest('.card');
+				if (!card || !state.data) return;
+				const idx = Number(card.dataset.idx);
+				const field = e.target.dataset.field;
+				if (!field) return;
+				if (e.target.type === 'number') {
+					state.data.items[idx][field] = Number(e.target.value) || 0;
+				}
+				saveDraft();
+			});
+
+			itemsEl.addEventListener('click', (e) => {
+				if (e.target.dataset.action === 'delete') {
+					const card = e.target.closest('.card');
+					if (!card || !state.data) return;
+					const idx = Number(card.dataset.idx);
+					state.data.items.splice(idx, 1);
+					renderItems();
+					setStatus('Item dihapus.', 'ok');
+					saveDraft();
+				}
+			});
+
+			document.getElementById('btn-copy').addEventListener('click', async () => {
+				try {
+					await navigator.clipboard.writeText(buildJson());
+					setStatus('Disalin ke clipboard.', 'ok');
+				} catch (err) {
+					setStatus('Gagal menyalin.', 'err');
+				}
+			});
+
+			document.getElementById('btn-download').addEventListener('click', () => {
+				const blob = new Blob([buildJson()], { type: 'application/json' });
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement('a');
+				a.href = url;
+				a.download = 'data.json';
+				a.click();
+				URL.revokeObjectURL(url);
+				setStatus('Siap diunduh.', 'ok');
+			});
+
+			document.getElementById('btn-reload').addEventListener('click', loadData);
+
+			document.getElementById('file-input').addEventListener('change', async (e) => {
+				const file = e.target.files?.[0];
+				if (!file) return;
+				try {
+					const text = await file.text();
+					applyRawJson(text);
+					setStatus('Impor berhasil.', 'ok');
+					saveDraft();
+				} catch (err) {
+					setStatus('Gagal impor.', 'err');
+				}
+			});
+
+			document.getElementById('app-title').addEventListener('input', (e) => {
+				if (!state.data) return;
+				state.data.appTitle = e.target.value;
+				saveDraft();
+			});
+
+			document.getElementById('last-updated').addEventListener('input', (e) => {
+				if (!state.data) return;
+				state.data.lastUpdated = e.target.value;
+				saveDraft();
+			});
+
+			document.getElementById('sources').addEventListener('input', (e) => {
+				if (!state.data) return;
+				const lines = e.target.value.split(/\n+/).map(l => l.trim()).filter(Boolean);
+				state.data.source = lines;
+				saveDraft();
+			});
+		}
+
+		function buildJson() {
+			if (!state.data) return '';
+			const payload = {
+				appTitle: state.data.appTitle || '',
+				source: state.data.source || [],
+				lastUpdated: state.data.lastUpdated || '',
+				items: denormalizeItems(state.data.items),
+			};
+			return JSON.stringify(payload, null, 2);
+		}
+
+		let loading = false;
+		async function loadData() {
+			if (loading) return;
+			loading = true;
+			setStatus('Memuat data…');
+			try {
+				const res = await fetch('data.json');
+				if (!res.ok) throw new Error('Gagal memuat data.json');
+				const json = await res.json();
+				state.data = {
+					appTitle: json.appTitle || '',
+					source: Array.isArray(json.source) ? json.source : (json.source ? [json.source] : []),
+					lastUpdated: json.lastUpdated || '',
+					items: normalizeItems(json.items || []),
+				};
+				fillTopFields();
+				renderItems();
+				setStatus('Data dimuat.', 'ok');
+				saveDraft();
+			} catch (err) {
+				console.error(err);
+				setStatus('Gagal memuat data.json', 'err');
+			} finally {
+				loading = false;
+			}
+		}
+
+		function applyRawJson(text) {
+			const json = JSON.parse(text);
+			state.data = {
+				appTitle: json.appTitle || '',
+				source: Array.isArray(json.source) ? json.source : (json.source ? [json.source] : []),
+				lastUpdated: json.lastUpdated || '',
+				items: normalizeItems(json.items || []),
+			};
+			fillTopFields();
+			renderItems();
+			saveDraft();
+		}
+
+		function fillTopFields() {
+			document.getElementById('app-title').value = state.data.appTitle || '';
+			document.getElementById('last-updated').value = state.data.lastUpdated || '';
+			document.getElementById('sources').value = (state.data.source || []).join('\n');
+		}
+
+		function disableServiceWorker() {
+			if (!('serviceWorker' in navigator)) return;
+			navigator.serviceWorker.getRegistrations().then(list => {
+				list.forEach(reg => reg.unregister());
+			});
+		}
+
+		disableServiceWorker();
+		bindEvents();
+		bindArabicSize();
+		bindTheme();
+		applyTheme();
+		loadArabicSize();
+		if (!loadDraft()) {
+			loadData();
+		}
+	</script>
+</body>
+</html>

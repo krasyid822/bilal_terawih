@@ -202,6 +202,9 @@
 			font-size: 13px;
 		}
 
+		.group.bilal-only { display: none; }
+		body[data-mode="bilal"] .group.bilal-only { display: flex; }
+
 		.toolbar label { font-weight: 600; color: var(--text); }
 
 		.toolbar input[type="range"] {
@@ -244,15 +247,18 @@
 
 		.cards {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-			gap: 16px;
+			grid-template-columns: 1fr;
+			gap: 18px;
+			align-items: start;
+			max-width: 740px;
+			margin: 0 auto;
 		}
 
 		.card {
 			background: var(--card);
 			border: 1px solid var(--card-border);
 			border-radius: 16px;
-			padding: 18px 18px 16px;
+			padding: 20px 20px 18px;
 			box-shadow: var(--shadow);
 			backdrop-filter: blur(10px);
 			display: flex;
@@ -261,6 +267,7 @@
 			position: relative;
 			overflow: hidden;
 			transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+			height: 100%;
 		}
 
 		.card::before {
@@ -298,12 +305,37 @@
 			font-size: 14px;
 		}
 
-		.role { display: inline-block; }
-		body[data-mode="bilal"] .role-jamaah { opacity: 0.55; color: var(--role-muted); }
-		body[data-mode="jamaah"] .role-bilal { opacity: 0.55; color: var(--role-muted); }
-		.role-bilal { color: var(--role-strong); }
-		.role-jamaah { color: var(--role-strong); }
+		.role { display: inline-block; color: var(--role-strong); opacity: 1; }
 		.role-neutral { color: var(--text); opacity: 1; }
+		.role-together { color: var(--role-strong); opacity: 1 !important; }
+
+		body[data-mode="jamaah"] .role-bilal,
+		body[data-mode="jamaah"] .role-bilal2 {
+			opacity: 0.4;
+			color: var(--role-muted);
+		}
+		body[data-mode="jamaah"] .role-jamaah { opacity: 1; color: var(--role-strong); }
+
+		body[data-mode="bilal"][data-bilal-variant="bilal1"] .role-bilal { opacity: 1; color: var(--role-strong); }
+		body[data-mode="bilal"][data-bilal-variant="bilal1"] .role-bilal2,
+		body[data-mode="bilal"][data-bilal-variant="bilal1"] .role-jamaah {
+			opacity: 0.4;
+			color: var(--role-muted);
+		}
+
+		body[data-mode="bilal"][data-bilal-variant="bilal2"] .role-bilal2 { opacity: 1; color: var(--role-strong); }
+		body[data-mode="bilal"][data-bilal-variant="bilal2"] .role-bilal,
+		body[data-mode="bilal"][data-bilal-variant="bilal2"] .role-jamaah {
+			opacity: 0.4;
+			color: var(--role-muted);
+		}
+
+		body[data-mode="bilal"][data-bilal-variant="solo"] .role-bilal,
+		body[data-mode="bilal"][data-bilal-variant="solo"] .role-bilal2 { opacity: 1; color: var(--role-strong); }
+		body[data-mode="bilal"][data-bilal-variant="solo"] .role-jamaah {
+			opacity: 0.4;
+			color: var(--role-muted);
+		}
 
 		.judul {
 			font-weight: 700;
@@ -339,6 +371,73 @@
 			flex-wrap: wrap;
 			align-items: center;
 			justify-content: flex-end;
+		}
+
+		.floating-toggle {
+			position: fixed;
+			right: 18px;
+			bottom: 18px;
+			z-index: 30;
+			appearance: none;
+			border: 1px solid var(--button-border);
+			background: var(--button-bg);
+			color: var(--button-text);
+			padding: 12px 14px;
+			border-radius: 14px;
+			font-weight: 800;
+			cursor: pointer;
+			box-shadow: var(--shadow);
+			opacity: 0;
+			pointer-events: none;
+			transform: translateY(8px);
+			transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease;
+		}
+
+		body.floating-active .floating-toggle {
+			opacity: 1;
+			pointer-events: auto;
+			transform: translateY(0);
+		}
+
+		.floating-toggle:hover { border-color: rgba(255, 255, 255, 0.2); }
+		.floating-toggle:active { transform: translateY(1px); }
+
+		.floating-panel {
+			position: fixed;
+			right: 18px;
+			bottom: 74px;
+			z-index: 28;
+			width: min(420px, calc(100% - 32px));
+			background: var(--card);
+			border: 1px solid var(--card-border);
+			border-radius: 16px;
+			box-shadow: var(--shadow);
+			padding: 12px;
+			opacity: 0;
+			pointer-events: none;
+			transform: translateY(10px);
+			transition: opacity 160ms ease, transform 160ms ease;
+		}
+
+		.floating-panel.open {
+			opacity: 1;
+			pointer-events: auto;
+			transform: translateY(0);
+		}
+
+		.floating-panel .toolbar {
+			margin-top: 0;
+			background: transparent;
+			border: none;
+			padding: 0;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 10px;
+		}
+
+		.floating-panel .toolbar .group {
+			width: 100%;
+			justify-content: space-between;
 		}
 
 		.witir-note {
@@ -436,7 +535,7 @@
 	<main class="page">
 		<section class="hero">
 			<h1 id="app-title">Bacaan Bilal Sholat Tarawih</h1>
-			<p>Susunan bacaan bilal tarawih 11 rakaat (8 tarawih + 3 witir), lengkap dengan teks Arab, latin, terjemahan, dan tautan audio jika tersedia. Kontrol audio: tekan 1x mulai/jeda, 3x reset.</p>
+			<p id="app-desc">Susunan bacaan bilal tarawih 11 rakaat (8 tarawih + 3 witir), lengkap dengan teks Arab, latin, terjemahan, dan tautan audio jika tersedia. Kontrol audio: tekan 1x mulai/jeda, 3x reset.</p>
 			<div class="toolbar">
 				<div class="group">
 					<label for="font-range">Ukuran Arab</label>
@@ -450,6 +549,12 @@
 					<span>Mode</span>
 					<button class="mode-btn" data-mode="bilal" type="button">Bilal</button>
 					<button class="mode-btn" data-mode="jamaah" type="button">Jamaah</button>
+				</div>
+				<div class="group bilal-only">
+					<span>Mode Bilal</span>
+					<button class="mode-btn" data-bilal-variant="solo" type="button">Solo</button>
+					<button class="mode-btn" data-bilal-variant="bilal1" type="button">Bilal 1</button>
+					<button class="mode-btn" data-bilal-variant="bilal2" type="button">Bilal 2</button>
 				</div>
 				<div class="group">
 					<span>Witir</span>
@@ -472,6 +577,7 @@
 			arabicSize: Number(localStorage.getItem('arabicSize') || 22),
 			mode: localStorage.getItem('mode') || 'bilal',
 			witirMode: localStorage.getItem('witirMode') || '3',
+			bilalVariant: localStorage.getItem('bilalVariant') || 'bilal1',
 		};
 
 		let dataCache = null;
@@ -502,10 +608,15 @@
 		function render(data) {
 			const cards = document.getElementById('cards');
 			const title = document.getElementById('app-title');
+			const desc = document.getElementById('app-desc');
 			title.textContent = data.appTitle || 'Bacaan Bilal Sholat Tarawih';
+			desc.textContent = data.appDescription || 'Susunan bacaan bilal tarawih 11 rakaat (8 tarawih + 3 witir), lengkap dengan teks Arab, latin, terjemahan, dan tautan audio jika tersedia. Kontrol audio: tekan 1x mulai/jeda, 3x reset.';
 			const footer = document.getElementById('footer');
 			const parts = [];
 			const sources = Array.isArray(data.source) ? data.source : (data.source ? [data.source] : []);
+			const witir3HiddenIds = Array.isArray(data.witir3HiddenIds)
+				? data.witir3HiddenIds.map((v) => Number(v)).filter((v) => Number.isFinite(v))
+				: [7];
 			if (sources.length) {
 				const links = sources.map((s) => `<a href="${s}" target="_blank" rel="noopener">${s}</a>`).join(', ');
 				parts.push(`Sumber: ${links}`);
@@ -514,7 +625,7 @@
 			footer.innerHTML = parts.join(' • ');
 
 			const items = (data.items || []).filter(item => {
-				if (item.id === 7 && state.witirMode !== '2-1') return false;
+				if (state.witirMode === '3' && witir3HiddenIds.includes(item.id)) return false;
 				return true;
 			});
 
@@ -578,6 +689,17 @@
 			if (dataCache) render(dataCache);
 		}
 
+		function applyBilalVariant() {
+			const variant = ['solo', 'bilal1', 'bilal2'].includes(state.bilalVariant) ? state.bilalVariant : 'bilal1';
+			state.bilalVariant = variant;
+			document.body.setAttribute('data-bilal-variant', variant);
+			document.querySelectorAll('.mode-btn[data-bilal-variant]').forEach(btn => {
+				btn.classList.toggle('active', btn.dataset.bilalVariant === variant);
+			});
+			localStorage.setItem('bilalVariant', variant);
+			if (dataCache && state.mode === 'bilal') render(dataCache);
+		}
+
 		function applyWitirMode() {
 			document.body.setAttribute('data-witir', state.witirMode);
 			document.querySelectorAll('.witir-btn').forEach(btn => {
@@ -600,6 +722,13 @@
 				state.theme = state.theme === 'dark' ? 'light' : 'dark';
 				localStorage.setItem('theme', state.theme);
 				applyTheme();
+			});
+
+			document.querySelectorAll('.mode-btn[data-bilal-variant]').forEach(btn => {
+				btn.addEventListener('click', () => {
+					state.bilalVariant = btn.dataset.bilalVariant;
+					applyBilalVariant();
+				});
 			});
 
 			document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
@@ -643,8 +772,104 @@
 			}, { passive: true });
 		}
 
+		function setupFloatingToolbar() {
+			const hero = document.querySelector('.hero');
+			const toolbar = document.querySelector('.toolbar');
+			if (!hero || !toolbar) return;
+
+			const placeholder = document.createElement('div');
+			placeholder.id = 'toolbar-placeholder';
+			placeholder.style.display = 'none';
+			placeholder.style.width = '100%';
+			placeholder.style.pointerEvents = 'none';
+
+			const floatingBtn = document.createElement('button');
+			floatingBtn.type = 'button';
+			floatingBtn.className = 'floating-toggle';
+			floatingBtn.setAttribute('aria-label', 'Buka pengaturan');
+			floatingBtn.textContent = '🛠️';
+
+			const floatingPanel = document.createElement('div');
+			floatingPanel.className = 'floating-panel';
+			floatingPanel.setAttribute('aria-live', 'polite');
+
+			document.body.appendChild(floatingBtn);
+			document.body.appendChild(floatingPanel);
+
+			let open = false;
+
+			function updatePlaceholderSize() {
+				const rect = toolbar.getBoundingClientRect();
+				const styles = getComputedStyle(toolbar);
+				placeholder.style.height = `${rect.height}px`;
+				placeholder.style.marginTop = styles.marginTop;
+				placeholder.style.marginBottom = styles.marginBottom;
+			}
+
+			function moveToolbarToPanel() {
+				if (floatingPanel.contains(toolbar)) return;
+				updatePlaceholderSize();
+				hero.replaceChild(placeholder, toolbar);
+				floatingPanel.appendChild(toolbar);
+				placeholder.style.display = 'block';
+			}
+
+			function restoreToolbar() {
+				if (!floatingPanel.contains(toolbar)) return;
+				floatingPanel.removeChild(toolbar);
+				hero.replaceChild(toolbar, placeholder);
+				placeholder.style.display = 'none';
+			}
+
+			function closePanel() {
+				floatingPanel.classList.remove('open');
+				floatingBtn.setAttribute('aria-expanded', 'false');
+				open = false;
+				restoreToolbar();
+			}
+
+			function openPanel() {
+				moveToolbarToPanel();
+				floatingPanel.classList.add('open');
+				floatingBtn.setAttribute('aria-expanded', 'true');
+				open = true;
+			}
+
+			floatingBtn.addEventListener('click', () => {
+				if (open) {
+					closePanel();
+					return;
+				}
+				openPanel();
+			});
+
+			window.addEventListener('resize', () => {
+				if (!open) return;
+				updatePlaceholderSize();
+			});
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && open) closePanel();
+			});
+
+			const observer = new IntersectionObserver((entries) => {
+				const visible = entries.some(entry => entry.isIntersecting);
+				if (visible) {
+					document.body.classList.remove('floating-active');
+					closePanel();
+					return;
+				}
+				document.body.classList.add('floating-active');
+			}, { threshold: 0.1 });
+
+			observer.observe(hero);
+		}
+
 		function classifyRole(line) {
 			const t = (line || '').trim().toLowerCase();
+			if (t.includes('dibaca bersama')) return 'together';
+			if (/^\s*2\s*bilal/.test(t) || t.includes('2 bilal') || t.includes('bilal 2') || t.includes('bilal kedua')) return 'bilal2';
+			if (t.includes('potongan ayat') || t.includes('qs.') || t.includes('qs ')) return 'bilal2';
 			if (t.includes('الصَّلَاةُ لَا إِلٰهَ إِلَّا اللَّهُ') || t.includes('ash-shalātu lā ilāha illallāh') || t.includes('ash-shalatu la ilaha illallah')) return 'jamaah';
 			if (t.includes('tahlil') || t.includes('لَا إِلٰهَ إِلَّا اللَّهُ') || t.includes('لا إله إلا الله')) return 'neutral';
 			if (t.includes('bilal (atau bersama-sama')) return 'neutral';
@@ -747,8 +972,10 @@
 		applyFontSize();
 		applyMode();
 		applyWitirMode();
+		applyBilalVariant();
 		setupControls();
 		setupSparks();
+		setupFloatingToolbar();
 		loadData();
 		registerSW();
 	</script>
