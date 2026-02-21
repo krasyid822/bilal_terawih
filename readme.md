@@ -1,0 +1,1 @@
+mungkin lain perbarui aturan agar bisa dibuat pemisah yang jelas antar bagian
